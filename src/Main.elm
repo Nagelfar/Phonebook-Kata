@@ -6,7 +6,7 @@ import Cli.Program as Program
 import File
 import Ports
 
-import Code exposing (..)
+import elm.Code exposing (..)
 
 type Msg
     = NoOp

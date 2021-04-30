@@ -2935,7 +2935,7 @@ var $author$project$Code$parseModel = function (_arguments) {
 		$author$project$Code$parseFileParameters(_arguments));
 };
 var $author$project$Ports$printAndExitFailure = _Platform_outgoingPort('printAndExitFailure', $elm$json$Json$Encode$string);
-var $author$project$Code$init = F2(
+var $author$project$Main$init = F2(
 	function (flags, _v0) {
 		var _arguments = _v0._arguments;
 		var _v1 = $author$project$Code$parseModel(
@@ -2957,7 +2957,7 @@ var $author$project$Code$init = F2(
 	});
 var $elm$json$Json$Decode$list = _Json_decodeList;
 var $author$project$Ports$printAndExitSuccess = _Platform_outgoingPort('printAndExitSuccess', $elm$json$Json$Encode$string);
-var $author$project$Code$CliOptions = function (_arguments) {
+var $author$project$Main$CliOptions = function (_arguments) {
 	return {_arguments: _arguments};
 };
 var $elm$core$Basics$identity = function (x) {
@@ -3234,12 +3234,12 @@ var $dillonkearns$elm_cli_options_parser$Cli$OptionsParser$withCommon = F2(
 				fullOptionsParser));
 	});
 var $dillonkearns$elm_cli_options_parser$Cli$OptionsParser$withRestArgs = $dillonkearns$elm_cli_options_parser$Cli$OptionsParser$withCommon;
-var $author$project$Code$program = A2(
+var $author$project$Main$program = A2(
 	$dillonkearns$elm_cli_options_parser$Cli$Program$add,
 	A2(
 		$dillonkearns$elm_cli_options_parser$Cli$OptionsParser$withRestArgs,
 		$dillonkearns$elm_cli_options_parser$Cli$Option$restArgs('rest'),
-		$dillonkearns$elm_cli_options_parser$Cli$OptionsParser$build($author$project$Code$CliOptions)),
+		$dillonkearns$elm_cli_options_parser$Cli$OptionsParser$build($author$project$Main$CliOptions)),
 	$dillonkearns$elm_cli_options_parser$Cli$Program$config);
 var $dillonkearns$elm_cli_options_parser$Cli$Program$ShowSystemMessage = {$: 'ShowSystemMessage'};
 var $dillonkearns$elm_cli_options_parser$Cli$Program$UserModel = F2(
@@ -5077,7 +5077,7 @@ var $dillonkearns$elm_cli_options_parser$Cli$Program$stateful = function (option
 		});
 };
 var $elm$json$Json$Decode$string = _Json_decodeString;
-var $author$project$Code$File = function (a) {
+var $author$project$Main$File = function (a) {
 	return {$: 'File', a: a};
 };
 var $elm$core$Platform$Sub$map = _Platform_map;
@@ -5086,8 +5086,8 @@ var $author$project$File$FileLoaded = function (a) {
 };
 var $author$project$File$onFileLoaded = _Platform_incomingPort('onFileLoaded', $elm$json$Json$Decode$string);
 var $author$project$File$subscriptions = $author$project$File$onFileLoaded($author$project$File$FileLoaded);
-var $author$project$Code$subscriptions = function (model) {
-	return A2($elm$core$Platform$Sub$map, $author$project$Code$File, $author$project$File$subscriptions);
+var $author$project$Main$subscriptions = function (model) {
+	return A2($elm$core$Platform$Sub$map, $author$project$Main$File, $author$project$File$subscriptions);
 };
 var $elm$json$Json$Decode$succeed = _Json_succeed;
 var $author$project$Code$addToPhonebook = F2(
@@ -5236,7 +5236,7 @@ var $author$project$File$save = _Platform_outgoingPort(
 					$elm$json$Json$Encode$string($.fileName))
 				]));
 	});
-var $author$project$Code$writePhonebookToFile = F2(
+var $author$project$Main$writePhonebookToFile = F2(
 	function (filename, book) {
 		return $author$project$File$save(
 			{
@@ -5244,7 +5244,7 @@ var $author$project$Code$writePhonebookToFile = F2(
 				fileName: filename
 			});
 	});
-var $author$project$Code$update = F3(
+var $author$project$Main$update = F3(
 	function (_v0, msg, model) {
 		if (msg.$ === 'NoOp') {
 			return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
@@ -5261,7 +5261,7 @@ var $author$project$Code$update = F3(
 					if (_v2.$ === 'Ok') {
 						if (_v2.a.$ === 'Added') {
 							var newPhoneBook = _v2.a.a;
-							return A2($author$project$Code$writePhonebookToFile, model.fileName, newPhoneBook);
+							return A2($author$project$Main$writePhonebookToFile, model.fileName, newPhoneBook);
 						} else {
 							var items = _v2.a.a;
 							return $author$project$Ports$printAndExitSuccess(items);
@@ -5273,9 +5273,9 @@ var $author$project$Code$update = F3(
 				}());
 		}
 	});
-var $author$project$Code$main = $dillonkearns$elm_cli_options_parser$Cli$Program$stateful(
-	{config: $author$project$Code$program, init: $author$project$Code$init, printAndExitFailure: $author$project$Ports$printAndExitFailure, printAndExitSuccess: $author$project$Ports$printAndExitSuccess, subscriptions: $author$project$Code$subscriptions, update: $author$project$Code$update});
-_Platform_export({'Code':{'init':$author$project$Code$main(
+var $author$project$Main$main = $dillonkearns$elm_cli_options_parser$Cli$Program$stateful(
+	{config: $author$project$Main$program, init: $author$project$Main$init, printAndExitFailure: $author$project$Ports$printAndExitFailure, printAndExitSuccess: $author$project$Ports$printAndExitSuccess, subscriptions: $author$project$Main$subscriptions, update: $author$project$Main$update});
+_Platform_export({'Main':{'init':$author$project$Main$main(
 	A2(
 		$elm$json$Json$Decode$andThen,
 		function (versionMessage) {
