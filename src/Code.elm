@@ -20,6 +20,16 @@ type alias Phonebook =
     List Entry
 
 
+type PhoneBookResult
+    = Added Phonebook
+    | Listed String
+
+
+type Operation
+    = ShouldAdd String String
+    | ShouldList (Maybe Number)
+
+
 asEntry : String -> Result String Entry
 asEntry line =
     case line |> String.split "\t" of
@@ -36,16 +46,6 @@ asEntry line =
 addToPhonebook : Phonebook -> Entry -> Phonebook
 addToPhonebook book entry =
     entry :: book
-
-
-type PhoneBookResult
-    = Added Phonebook
-    | Listed String
-
-
-type Operation
-    = ShouldAdd String String
-    | ShouldList (Maybe Number)
 
 
 parsePhonebookArguments : String -> Result String Operation
@@ -116,8 +116,6 @@ parseModel arguments =
                             }
                         )
             )
-
-
 
 
 parsePhonebookFromContent : String -> Result String Phonebook
