@@ -12,11 +12,19 @@ Requirements of the Kata:
         - Return a list of lexical sorted entries from the phone book
           Support skip & limit parameters
 
+## Remarks
+
 The Kata implementation started in the Salzburg Software Craftmanship Meetup Group with the following rules:
 
 - Write the phone book with immutable data structures
 - Mutate the state at the last responsible moment
 
+Additional remarks:
+
+- Parsing the arguments manually was chosen explicitly over using a framework.
+- To get a cli-version of Elm the main part of the `create-cli.js` script was taken from <https://github.com/dillonkearns/elm-cli-options-parser/blob/master/examples/create-cli.js>
+- There is no proper logging in place
+- Implementation efficiency was not a goal
 
 ## Examples 1
 
@@ -26,14 +34,14 @@ Input:
     pb foo.txt add Christian +4312345
     pb foo.txt list
 
-Output:     
+Output:
 
     Adam   +987654
     Christian  +4312345
 
 ## Example 2
 
-Input: 
+Input:
 
     pb bar.txt add Markus +12334
     pb bar.txt add Christian +4312345

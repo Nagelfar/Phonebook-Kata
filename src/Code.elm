@@ -48,27 +48,6 @@ addToPhonebook book entry =
     entry :: book
 
 
-parsePhonebookArguments : String -> Result String Operation
-parsePhonebookArguments arguments =
-    case arguments |> String.split " " of
-        [ "add", name, number ] ->
-            ShouldAdd name number
-                |> Ok
-
-        [ "list" ] ->
-            ShouldList Nothing
-                |> Ok
-
-        [ "list", number ] ->
-            number
-                |> String.toInt
-                |> ShouldList
-                |> Ok
-
-        _ ->
-            Err <| "Could not parse arguments " ++ arguments
-
-
 listItems : Maybe Number -> Phonebook -> String
 listItems count book =
     book
@@ -89,6 +68,28 @@ phonebook operation book =
             book
                 |> listItems count
                 |> Listed
+
+
+parsePhonebookArguments : String -> Result String Operation
+parsePhonebookArguments arguments =
+    case arguments |> String.split " " of
+        [ "add", name, number ] ->
+            ShouldAdd name number
+                |> Ok
+
+        [ "list" ] ->
+            ShouldList Nothing
+                |> Ok
+
+        [ "list", number ] ->
+            number
+                |> String.toInt
+                |> ShouldList
+                |> Ok
+
+        _ ->
+            Err <| "Could not parse arguments " ++ arguments
+
 
 
 parseFileParameters : String -> Result String ( String, String )
@@ -141,11 +142,3 @@ parsePhonebookFromContent file =
             )
             (Ok [])
         |> Result.mapError (String.join "\n")
-
-
-pbWithPhonebook : String -> Phonebook -> Result String PhoneBookResult
-pbWithPhonebook remainingArguments book =
-    remainingArguments
-        |> parsePhonebookArguments
-        |> Result.map (\operation -> phonebook operation book)
-
