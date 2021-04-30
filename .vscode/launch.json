@@ -5,6 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "preLaunchTask": "npm: build",
             "type": "pwa-node",
             "request": "launch",
             "name": "Launch Program",
@@ -12,7 +13,9 @@
                 "<node_internals>/**"
             ],
             "program": "${workspaceFolder}/cli/phonebook.js",
-            "args": ["foo.txt add Adam +987654"]
+            "args": [
+                "foo.txt add Adam +987654"
+            ]
         }
     ]
 }

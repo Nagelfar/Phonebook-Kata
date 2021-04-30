@@ -8,26 +8,24 @@ module.exports = (name, opts) => {
     flags: { argv: process.argv, versionMessage: "1.2.3" }
   });
 
-  console.log(process.argv)
-
   // program.ports.print.subscribe(message => {
   //   console.log(message)
   // });
   program.ports.load.subscribe (message => {
-      console.log("Loading ", message);
+      console.debug("Loading ", message);
       fs.readFile(message, 'utf8', (err, data) => {
           if(err) throw err;
           program.ports.onFileLoaded.send(data);
       })
   });
   program.ports.save.subscribe (message => {
-    console.log("Saving ", message);
+    console.debug("Saving ", message);
     fs.writeFile(message.fileName, message.content, (err) => {
       if(err) throw err;
     })
   });
   program.ports.printAndExitFailure.subscribe(message => {
-    console.log(message);
+    console.error(message);
     process.exit(1);
   });
   program.ports.printAndExitSuccess.subscribe(message => {
